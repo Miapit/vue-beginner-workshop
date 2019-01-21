@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vue Components, Events and Props</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+  <link rel="stylesheet" href="https://workshop.vuebulgaria.com/assets/styles/style.css">
+</head>
+
+<body>
+<div id="app">
+  <div class="map" @click="showHouse(null)">
+    <house     
+        v-for="(house, houseId) in houses"
+        :key="houseId"
+        :house="house"
+        :house-id="houseId"
+        :current-house="currentHouse"
+        @change-house="showHouse"
+        >
+    </house>
+  </div>
+</div>
+
+<!-- Component Templates Start Here -->
+<script type="text/x-template" id="house-template">
+    <div
+    :class="[houseId, { 'is-active': isVisible }]"
+    class="house"
+    @click.stop="$emit('change-house', currentHouse === houseId ? null : houseId )"
+>
+  <img :src="house.sigil">
+  <div class="members" 
+       v-if="isVisible">
+    <div
+        v-for="member in house.members"
+        :key="member.id"
+        class="member"
+    >
+      {{ member.name }}
+    </div>
+  </div>
+</div>
+
+</script>
+<!-- Component Templates End Here -->
+<script src="https://workshop.vuebulgaria.com/assets/scripts/houses.js"></script>
+<script src="./app.js"></script>
+</body>
+</html>
