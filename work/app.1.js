@@ -1,4 +1,15 @@
+var Members = {
+    template: '#members-template',
+    props: {
+        members: Array
+    }
+  }
+
+
 var House = {
+    components: {
+        Members: Members
+    },
     template: '#house-template',
     props: {
       house: Object,
@@ -16,8 +27,8 @@ var House = {
 var app = new Vue({
     el: '#app',
     components: {
-      House: House
-    },
+        House: House
+      },
     data: {
       houses: houses,
       currentHouse: null
@@ -26,6 +37,6 @@ var app = new Vue({
       showHouse (houseId) {
         this.currentHouse = houseId
       }
-    
     }
-})
+  })
+  
